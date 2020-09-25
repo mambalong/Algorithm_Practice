@@ -13,3 +13,28 @@
 # 1) 简述思路
 # 2) 请用你熟悉的编程语言编码实现以下方法，输入为m台服务器，每台机器处理一个任务的时间为t[i]，完成n个任务，
 # 输出n个任务在m台服务器的分布：
+
+# (1) 思路：记录每一个服务器已经累计执行的时间，对于一个新任务，选取的对应服务器需符合一下条件，已累计执行时间加上新任务
+# 耗时要最小。
+
+t = [7, 8, 10]
+m = len(t)
+n = int(input())
+
+def estimate_process_time(t, m, n):
+    cost = [0] * m
+    for i in range(n):
+        chosen = 0
+        lst = cost[chosen] + t[chosen]
+        for j in range(m):
+            tmp = cost[j] + t[j]
+            if tmp < lst:
+                chosen = j
+                lst = tmp
+        cost[chosen] = lst
+    print(cost)
+    print(max(cost))
+
+estimate_process_time(t, m, n)
+
+
