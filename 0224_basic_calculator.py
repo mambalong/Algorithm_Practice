@@ -1,7 +1,8 @@
 '''
 Implement a basic calculator to evaluate a simple expression string.
 
-The expression string may contain open ( and closing parentheses ), the plus + or minus sign -, non-negative integers and empty spaces .
+The expression string may contain open ( and closing parentheses ), the plus + or minus sign -, 
+non-negative integers and empty spaces .
 
 Example 1:
 
@@ -21,9 +22,44 @@ Do not use the eval built-in library function.
 
 '''
 
+
+
 def calculate(s):
     
-    def str2num(ss):
-        res = 0
-        for c in ss:
-            
+    def eveluate_expr(stack):
+        res = stack.pop() if stack else 0
+        while stack and stack[-1] != ')':
+            sign = stack.pop()
+            if sign == '+':
+                res += stack.pop()
+            elif sign == '-':
+                res -= stack.pop()
+        return res
+    
+    stack = []
+    pv, operand = 0, 0
+
+    for i in range(len(s)-1, -1, -1):
+        cha = s[i]
+        
+        if cha.isdigit():
+            operand += 10 ** pv * int(cha)
+            pv += 1
+        
+        elif cha != ' ':
+            if pv:
+                stack.append(operand)
+                pv, operand = 0, 0
+            if cha == '(':
+                res = eveluate_expr(stack)
+                stack.pop()
+                stack.append(res)
+            else:
+                stack.append(cha)
+
+    if pv:
+        stack.append(operand)   
+
+    return eveluate_expr(stack)
+
+print(calculate('2+(3+4)-4'))
