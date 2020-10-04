@@ -4,15 +4,12 @@ def isValid(board, r, c, num):
     for i in range(9):
         # column
         if board[i][c] == num:
-            print('c')
             return False
         # row
         if board[r][i] == num:
-            print('r')
             return False
         # grid
         if board[r//3*3+i//3][c//3*3+i%3] == num:
-            print('g')
             return False
     return True
 
@@ -24,7 +21,6 @@ def backtrack(board, r, c):
     if r == 9:
         return True
     # there is already a digit at (r, c)
-    print(r,c)
     if board[r][c] != '.':
         return backtrack(board, r, c+1)
     
@@ -41,7 +37,8 @@ def backtrack(board, r, c):
 
 def solveSudoku(board):
     backtrack(board, 0, 0)
-    print(board)
+    for i in board:
+        print(' '.join(i))
 
 board = [['5', '3', '.', '.', '7', '.', '.', '.', '.'], ['6', '.', '.', '1', '9', '5', '.', '.', '.'], ['.', '9', '8', '.', '.', '.', '.', '6', '.'], ['8', '.', '.', '.', '6', '.', '.', '.', '3'], ['4', '.', '.', '8', '.', '3', '.', '.', '1'], ['7', '.', '.', '.', '2', '.', '.', '.', '6'], ['.', '6', '.', '.', '.', '.', '2', '8', '.'], ['.', '.', '.', '4', '1', '9', '.', '.', '5'], ['.', '.', '.', '.', '8', '.', '.', '7', '9']]
 # for d in digits:
