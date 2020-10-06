@@ -23,21 +23,20 @@
 
 解释: 数组不能分割成两个元素和相等的子集.
 '''
-class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
-        summ = sum(nums)
-        n = len(nums)
-        if summ % 2 != 0:
-            return False
-        summ //= 2
-        dp = [[False] * (summ + 1) for _ in range(n+1)]
-        for i in range(len(dp)):
-            dp[i][0] = True
-        
-        for i in range(1, n+1):
-            for j in range(1, summ + 1):
-                if j < nums[i-1]:
-                    dp[i][j] = dp[i-1][j]
-                else:
-                    dp[i][j] = dp[i-1][j] or dp[i-1][j-nums[i-1]]
-        return dp[n][summ]
+def canPartition(nums):
+    summ = sum(nums)
+    n = len(nums)
+    if summ % 2 != 0:
+        return False
+    summ //= 2
+    dp = [[False] * (summ + 1) for _ in range(n+1)]
+    for i in range(len(dp)):
+        dp[i][0] = True
+    
+    for i in range(1, n+1):
+        for j in range(1, summ + 1):
+            if j < nums[i-1]:
+                dp[i][j] = dp[i-1][j]
+            else:
+                dp[i][j] = dp[i-1][j] or dp[i-1][j-nums[i-1]]
+    return dp[n][summ]
