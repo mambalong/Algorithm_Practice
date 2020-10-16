@@ -1,0 +1,27 @@
+int BFS(Node start, Node target){
+    Queue<Node> q;  // 核心数据结构
+    Set<Node> visited;  // 避免走回头路
+
+    q.offer(start)  // 将起点加入队列
+    visited.add (start)
+    int step = 0    // 记录扩散的步数
+
+    while (q not empty){
+        int sz = q.size()
+        // 将当前队列中的所有节点想四周扩散
+        for(int i = 0; i < sz; i++){
+            Node cur = q.poll()
+            // 判断是否到达终点
+            if (cur is target){
+                return step
+            }
+            for (Node x : cur.adj()){
+                if (x not in visited){
+                    q.offer(x)
+                    visited.add(x)
+                }
+            }
+        }
+        step++
+    }
+}
