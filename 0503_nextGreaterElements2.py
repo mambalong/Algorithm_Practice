@@ -14,7 +14,7 @@ The second 1's next greater number needs to search circularly, which is also 2.
 
 '''
 class Solution:
-    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+    def nextGreaterElements(nums):
         n = len(nums)
         res = [-1] * n
         stack = list(reversed(nums))
