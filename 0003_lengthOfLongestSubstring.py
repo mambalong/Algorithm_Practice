@@ -1,4 +1,6 @@
 '''
+3. Longest Substring Without Repeating Characters
+
 Given a string s, find the length of the longest substring without repeating characters.
 
  
@@ -53,6 +55,7 @@ Output: 0
 左指针右移之前要先把对应的元素移除出 window。
 这样就可以计算出每个位置往左看，最长的不重复子串
 收缩 window 的判断条件是对应的元素个数大于 1
+window 使用的数据结构是 defaultdict
 '''
 from collections import defaultdict
 def lengthOfLongestSubstring(s):
