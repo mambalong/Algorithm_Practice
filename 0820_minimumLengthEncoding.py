@@ -28,15 +28,39 @@ Each word has only lowercase letters.
 # 用 set 来去掉重复的单词，然后遍历每一个单词，遍历单词的每一个后缀，如果后缀出现在 set 里，
 # 就去掉，最后 set 里就没有是其他单词后缀的单词了
 
-def minimumLengthEncoding(words):
-    words_set = set(words)
-    for word in words:
-        for i in range(1, len(word)):
-            suffix = word[i: ]
-            words_set.discard(suffix)
-    return len(''.join(words_set)) + len(words_set)
+# class Solution:
+#     def minimumLengthEncoding(self, words) -> int:
+#         words_set = set(words)
+#         for word in words:
+#             for i in range(1, len(word)):
+#                 suffix = word[i: ]
+#                 words_set.discard(suffix)
+#         return len(''.join(words_set)) + len(words_set)
 
 # 字典树，将单词倒序插入到字典树中，那么每个叶子节点就是我们
+
+class Solution:
+    def minimumLengthEncoding(self, words) -> int:
+        words = list(set(words))
+        trie = {}
+        nodes = []
+        for word in words:
+            curr = trie
+            for c in reversed(word):
+                if c not in curr:
+                    curr[c] = {}
+                curr = curr[c]
+            nodes.append(curr)
+        res = 0
+        for word, node in zip(words, nodes):
+            if len(node) == 0:
+                res += len(word) + 1
+        return res
+
+
+
+solution = Solution()
+print(solution.minimumLengthEncoding(['time', 'me', 'work']))
 
 
 
