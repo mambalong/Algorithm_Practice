@@ -23,7 +23,6 @@ def nextGreaterElement(nums1, nums2):
     for num in reversed(nums2):
         while stack and num >= stack[-1]:
             stack.pop()
-        print(stack)
         if num in nums1:
             nums1[dic[num]] = stack[-1] if stack else -1
         stack.append(num)
