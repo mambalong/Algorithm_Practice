@@ -63,6 +63,7 @@ def solveNQueens(n):
     return res
 
 print(solveNQueens(4))
+ 
 
 
     

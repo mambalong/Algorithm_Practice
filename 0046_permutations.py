@@ -15,15 +15,24 @@ Output:
 ]
 '''
 
-s = input()
 
-res = []
+class Solution:
+    def permute(self, nums):
+      res = []
+      def dfs(nums, track):
+        if len(track) == len(nums):
+          res.append(list(track))
+        for num in nums:
+          if num in track:
+            continue
+          track.append(num)
+          dfs(nums, track)
+          track.pop()
+      dfs(nums, [])
+      return res
+        
 
-def backtrack(nums, track):
-    if len(track) == len(nums):
-        res.append(track)
-    for i in range(len(nums)):
-        i
 
-def permute(s):
+
+
 
